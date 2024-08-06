@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { PostScreen } from '../screens/PostScreen';
 import { THEME } from '../theme';
 import { AppHeaderButtons } from '../components/AppHeaderButtons';
-import { toggleBooked } from '../store/action/post';
+import { toggleBooked } from '../store/posts/postsSlice';
 
 
 export const PostStack = ({ navigation }) => {
     const Stack = createStackNavigator();
     const dispatch = useDispatch();
-    const allPosts = useSelector(state => state.post.allPosts);
+    const allPosts = useSelector(state => state.posts.allPosts);
 
     const handleToggleBooked = useCallback((postId) => {
         dispatch(toggleBooked(postId));

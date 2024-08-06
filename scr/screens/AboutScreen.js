@@ -18,7 +18,8 @@ export const AboutScreen = () => {
 				<Text style={styles.titleText}>Используемые технологии:</Text>
 			</View>
 			<View style={styles.descriptionWrap}>
-				<Text style={styles.descriptItem}>- Redux</Text>
+				<Text style={styles.descriptItem}>- Redux-Toolkit</Text>
+				<Text style={styles.descriptItem}>- Reanimated</Text>
 				<Text style={styles.descriptItem}>- React-navigation/bottom-tabs</Text>
 				<Text style={styles.descriptItem}>- React-navigation/drawer</Text>
 				<Text style={styles.descriptItem}>- Expo-font</Text>

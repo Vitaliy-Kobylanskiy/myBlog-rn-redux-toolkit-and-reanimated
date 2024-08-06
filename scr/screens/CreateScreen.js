@@ -2,23 +2,26 @@ import React, { useState, useRef } from "react";
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useDispatch } from "react-redux";
 import { PhotoPicker } from "../components/PhotoPicker";
-import { addPost } from "../store/action/post";
+import { addPost } from "../store/posts/postsSlice";
 import { THEME } from "../theme";
 
 export const CreateScreen = ({ navigation }) => {
 	const [text, setText] = useState('');
+	const [description, setDescription] = useState('');
 	const dispatch = useDispatch();
 	const imgRef = useRef();
 
 	const saveHandler = () => {
 		const post = {
 			date: new Date().toJSON(),
-			text: text,
+			textTitle: text,
+			description: description,
 			img: imgRef.current,
 			booked: false
 		};
 		dispatch(addPost(post));
 		setText('');
+		setDescription('');
 		imgRef.current = null;
 		navigation.navigate('MainTab');
 	};
@@ -41,6 +44,11 @@ export const CreateScreen = ({ navigation }) => {
 							placeholder='Введите текст поста'
 							value={text}
 							onChangeText={setText}
+							multiline />
+						<TextInput style={styles.input}
+							placeholder='Введите описание поста'
+							value={description}
+							onChangeText={setDescription}
 							multiline />
 					</View>
 					<PhotoPicker onPick={photoPickHandler} resetPhoto={resetPhotoHandler} />
@@ -81,7 +89,8 @@ const styles = StyleSheet.create({
 		textAlign: 'center'
 	},
 	inputWrapper: {
-		alignItems: 'center'
+		alignItems: 'center',
+		borderRadius: 10
 	},
 	input: {
 		width: '70%',

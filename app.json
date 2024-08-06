@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "rn-blog",
-    "slug": "rn-myblog",
+    "slug": "rn-myblog-redux-toolkit",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,7 +27,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "7fe52a05-af32-45f8-b52c-9b377bdcc101"
+        "projectId": "cbd7d7b0-cf31-4073-aa1d-ace48f158d3d"
       }
     },
     "owner": "vskoby",
@@ -35,7 +35,7 @@
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/7fe52a05-af32-45f8-b52c-9b377bdcc101"
+      "url": "https://u.expo.dev/cbd7d7b0-cf31-4073-aa1d-ace48f158d3d"
     }
   }
 }

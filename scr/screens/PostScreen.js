@@ -1,16 +1,14 @@
 import React from "react";
 import { StyleSheet, ScrollView, Text, Image, Button, View, Alert } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
-import { removePost } from "../store/action/post";
+import Animated, {  ZoomInLeft } from "react-native-reanimated";
+import { removePost } from "../store/posts/postsSlice";
 import { THEME } from "../theme";
 
-
 export const PostScreen = ({ navigation, route }) => {
-
 	const dispatch = useDispatch();
 	const postId = route.params.post.id;
-	const post = useSelector(state => state.post.allPosts.find(p => p.id === postId));
-
+	const post = useSelector(state => state.posts.allPosts.find(p => p.id === postId));
 
 	const removeHandler = () => {
 		Alert.alert('Удаление поста', 'Вы точно хотите удалить пост?', [
@@ -33,17 +31,23 @@ export const PostScreen = ({ navigation, route }) => {
 
 	return (
 		<ScrollView style={styles.container}>
-			<Image style={styles.img} source={{ uri: post.img }} />
-			<View style={styles.wrapText}>
-				<Text style={styles.text}>{post.text}</Text>
-			</View>
-			<View style={styles.wrapBtn}>
-				<Button style={styles.button} color={THEME.DANGER_COLOR} title="Удалить" onPress={removeHandler} />
-			</View>
-		</ScrollView>
+			<Animated.View
+				key={`${postId}-${Date.now()}`}
+			>
+				<Animated.Image entering={ZoomInLeft.duration(500)} style={styles.img} source={{ uri: post.img }} />
+				<Animated.View entering={ZoomInLeft.duration(1000)} style={styles.wrapText}>
+					<Text style={styles.text}>{post.textTitle}</Text>
+				</Animated.View>
+				<Animated.View entering={ZoomInLeft.duration(1500)} style={styles.wrapText}>
+					<Text style={styles.description}>{post.description}</Text>
+				</Animated.View>
+				<Animated.View entering={ZoomInLeft.duration(2000)} style={styles.wrapBtn}>
+					<Button style={styles.button} color={THEME.DANGER_COLOR} title="Удалить" onPress={removeHandler} />
+				</Animated.View>
+			</Animated.View>
+		</ScrollView >
 	);
 };
-
 
 const styles = StyleSheet.create({
 	container: {
@@ -53,16 +57,17 @@ const styles = StyleSheet.create({
 	},
 	img: {
 		width: '100%',
-		height: 350
+		height: 350,
+		borderRadius: 20
 	},
 	wrapText: {
 		alignItems: 'center',
 		paddingTop: 10
 	},
 	text: {
-		fontFamily: 'open-regular'
-	}
-	,
+		fontFamily: 'open-bold',
+		fontSize: 16
+	},
 	wrapBtn: {
 		alignItems: 'center',
 		paddingTop: 10,
@@ -71,5 +76,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center'
+	}, 
+	description: {
+		fontFamily: 'open-regular'
 	}
 });

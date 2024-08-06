@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, FlatList } from 'react-native';
-import { useSelector, UseSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Post } from "../components/Post";
 
 export const BookedScreen = ({navigation}) => {
@@ -9,7 +9,7 @@ export const BookedScreen = ({navigation}) => {
 		navigation.navigate('Post', { post });
 	};
 
-	const bookedPosts = useSelector(state => state.post.bookedPosts);
+	const bookedPosts = useSelector(state => state.posts.bookedPosts);
 
 	return (
 		<View style={styles.container}>

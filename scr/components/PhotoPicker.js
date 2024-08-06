@@ -67,7 +67,8 @@ const styles = StyleSheet.create({
 	image: {
 		width: '100%',
 		height: 350,
-		marginTop: 15
+		marginTop: 15,
+		borderRadius: 20
 	},
 	createBtn: {
 		width: '100%',
