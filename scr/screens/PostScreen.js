@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, ScrollView, Text, Image, Button, View, Alert } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
-import Animated, {  ZoomInLeft } from "react-native-reanimated";
+import Animated, { ZoomInLeft } from "react-native-reanimated";
 import { removePost } from "../store/posts/postsSlice";
 import { THEME } from "../theme";
 
 export const PostScreen = ({ navigation, route }) => {
+	console.log('render');
 	const dispatch = useDispatch();
 	const postId = route.params.post.id;
 	const post = useSelector(state => state.posts.allPosts.find(p => p.id === postId));
@@ -32,7 +33,7 @@ export const PostScreen = ({ navigation, route }) => {
 	return (
 		<ScrollView style={styles.container}>
 			<Animated.View
-				key={`${postId}-${Date.now()}`}
+				key={postId}
 			>
 				<Animated.Image entering={ZoomInLeft.duration(500)} style={styles.img} source={{ uri: post.img }} />
 				<Animated.View entering={ZoomInLeft.duration(1000)} style={styles.wrapText}>
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center'
-	}, 
+	},
 	description: {
 		fontFamily: 'open-regular'
 	}
